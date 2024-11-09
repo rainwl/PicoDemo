@@ -18,3 +18,11 @@ Logs/
 Library/
 
 *.apk
+
+obj/
+
+.idea/
+
+Assets/Resources/BillingMode.json
+
+Assets/Resources/BillingMode.json.meta
