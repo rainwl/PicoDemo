@@ -6,16 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 0
-    path: Assets/Samples/XR Interaction Toolkit/2.5.4/Hands Interaction Demo/HandsDemoScene.unity
-    guid: 3ff35cecbcc52cc42945cf531638a60a
-  - enabled: 0
-    path: Assets/MRTKSample/Scenes/HandInteractionExamples.unity
-    guid: 1300a9dceb058844b865199dcd557fc7
-  - enabled: 0
-    path: Assets/Scenes/Test2.unity
+    path: Assets/Scenes/MRTK_PICO_SCENE_HAND_TRACKING.unity
     guid: 5077a255cfed5594e81cb0d6fba4308a
   m_configObjects:
     Unity.XR.PXR.Settings: {fileID: 11400000, guid: d5fc47875ea4c114894516e9b55989ae, type: 2}
