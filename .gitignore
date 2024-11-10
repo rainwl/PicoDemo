@@ -24,3 +24,5 @@ obj/
 Assets/Resources/BillingMode.json
 
 Assets/Resources/BillingMode.json.meta
+
+*.7z
