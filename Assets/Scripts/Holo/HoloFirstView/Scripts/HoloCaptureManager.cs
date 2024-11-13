@@ -64,10 +64,10 @@ public class HoloCaptureManager : MonoBehaviour
         }
         VideoTexture = new Texture2D(resolution.width, resolution.height, TextureFormat.BGRA32, false);
 
-#if UNITY_EDITOR || UNITY_WSA
-        HoloCaptureHelper.Instance.Init(resolution, frame, true, EnableHolograms, Opacity, false,
-UnityEngine.XR.WSA.WorldManager.GetNativeISpatialCoordinateSystemPtr(), OnFrameSampleCallback);//最后有个回调
-#endif
+// #if UNITY_EDITOR || UNITY_WSA
+//         HoloCaptureHelper.Instance.Init(resolution, frame, true, EnableHolograms, Opacity, false,
+// UnityEngine.XR.WSA.WorldManager.GetNativeISpatialCoordinateSystemPtr(), OnFrameSampleCallback);//最后有个回调
+// #endif
     }
 
 #if UNITY_EDITOR || UNITY_WSA

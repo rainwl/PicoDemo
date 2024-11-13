@@ -2,27 +2,23 @@
 using System.Collections;
 using Common;
 using UnityEngine;
-using TMPro;
-using Vuforia;
-using Microsoft.MixedReality.Toolkit.UI;
-using Microsoft.MixedReality.Toolkit.Utilities;
-using Dock;
+// using TMPro;
+// using Vuforia;
+// using Microsoft.MixedReality.Toolkit.UI;
+// using Microsoft.MixedReality.Toolkit.Utilities;
+// using Dock;
 using MrPlatform.Scripts.Network.Client;
 
 public class ARManager : MonoBehaviour
 {
     public static ARManager Instance;
     public Transform AnchorRoot;
-    public VuforiaBehaviour Vuforia;
-    public ImageTargetBehaviour ImageTarget_Callibration;
+    // public VuforiaBehaviour Vuforia;
+    // public ImageTargetBehaviour ImageTarget_Callibration;
     public int ScanOutTime = 15;
     private void Awake()
     {
         Instance = this;
-    }
-    void Start()
-    {
-
     }
     public void OnRequestCallibration(BroadcastInfo info) 
     {
@@ -45,11 +41,11 @@ public class ARManager : MonoBehaviour
         }
         try
         {
-            ImageTarget_Callibration.SetHeight(0.01f*height);
-            Vuforia.enabled = true;
-            Debug.Log("ImageTarget Size W:"+ ImageTarget_Callibration.GetSize().x+",H:" 
-                + ImageTarget_Callibration.GetSize().y);
-            StartCoroutine(CheckScan());
+            // ImageTarget_Callibration.SetHeight(0.01f*height);
+            // Vuforia.enabled = true;
+            // Debug.Log("ImageTarget Size W:"+ ImageTarget_Callibration.GetSize().x+",H:" 
+            //     + ImageTarget_Callibration.GetSize().y);
+            // StartCoroutine(CheckScan());
         }
         catch (Exception e)
         {
@@ -77,8 +73,8 @@ public class ARManager : MonoBehaviour
         {
             PlaySoundManager.Instance.PlayEffect("FinishScan");
             Debug.Log("OnFinishedScan");
-            trackedPos = ImageTarget_Callibration.transform.position;
-            trackedRot = ImageTarget_Callibration.transform.rotation;
+            // trackedPos = ImageTarget_Callibration.transform.position;
+            // trackedRot = ImageTarget_Callibration.transform.rotation;
             StopScan();
             ConfirmCallibration();
         }
@@ -86,7 +82,7 @@ public class ARManager : MonoBehaviour
     void StopScan() 
     {
         isScanning = false;
-        Vuforia.enabled = false;
+        // Vuforia.enabled = false;
     }
 
     Vector3 trackedPos;
@@ -96,8 +92,7 @@ public class ARManager : MonoBehaviour
     {
         GameObject go = GameObject.Instantiate(CallibrationCube);
         go.SetActive(true);
-        go.transform.localScale = new Vector3(ImageTarget_Callibration.GetSize().x,1,
-            ImageTarget_Callibration.GetSize().y);
+        // go.transform.localScale = new Vector3(ImageTarget_Callibration.GetSize().x,1, ImageTarget_Callibration.GetSize().y);
         go.transform.rotation = trackedRot;
         go.transform.position = trackedPos;
         Destroy(go, 10);
@@ -224,8 +219,8 @@ public class ARManager : MonoBehaviour
 
     }
     //========================
-    public AxisFlags RotateAxisConstraint;
-    public ObjectManipulator.RotateInOneHandType RotateInOneHandType;
+    // public AxisFlags RotateAxisConstraint;
+    // public ObjectManipulator.RotateInOneHandType RotateInOneHandType;
     public float ScaleMaximum = 10;
     public float ScaleMinimum = 0.2f;
 
@@ -262,24 +257,24 @@ public class ARManager : MonoBehaviour
             go.transform.localEulerAngles = new Vector3(rotx, roty, rotz);
             go.AddComponent<UpdateTransform>().updateID = updateID;
             go.AddComponent<PlayAnimation>();
-            go.AddComponent<Dockable>();//考虑下这里是不是可以用其他代码实现
-
-            //添加MRTK手势操作
-            ObjectManipulator om = go.AddComponent<ObjectManipulator>();
-            Debug.Log("添加了MRTK手势操作");
-            om.OneHandRotationModeFar = RotateInOneHandType;
-            om.OneHandRotationModeNear = RotateInOneHandType;
-            //旋转轴向约束
-            RotationAxisConstraint rc = go.AddComponent<RotationAxisConstraint>();
-            rc.ConstraintOnRotation = RotateAxisConstraint;
-            //缩放约束
-            MinMaxScaleConstraint scale = go.AddComponent<MinMaxScaleConstraint>();
-            scale.ScaleMaximum = ScaleMaximum;
-            scale.ScaleMinimum = ScaleMinimum;
-
-            om.MoveLerpTime = UpdateTransformManager.Instance.UpdateTime;
-            om.RotateLerpTime = UpdateTransformManager.Instance.UpdateTime;
-            om.ScaleLerpTime = UpdateTransformManager.Instance.UpdateTime;
+            // go.AddComponent<Dockable>();//考虑下这里是不是可以用其他代码实现
+            //
+            // //添加MRTK手势操作
+            // ObjectManipulator om = go.AddComponent<ObjectManipulator>();
+            // Debug.Log("添加了MRTK手势操作");
+            // om.OneHandRotationModeFar = RotateInOneHandType;
+            // om.OneHandRotationModeNear = RotateInOneHandType;
+            // //旋转轴向约束
+            // RotationAxisConstraint rc = go.AddComponent<RotationAxisConstraint>();
+            // rc.ConstraintOnRotation = RotateAxisConstraint;
+            // //缩放约束
+            // MinMaxScaleConstraint scale = go.AddComponent<MinMaxScaleConstraint>();
+            // scale.ScaleMaximum = ScaleMaximum;
+            // scale.ScaleMinimum = ScaleMinimum;
+            //
+            // om.MoveLerpTime = UpdateTransformManager.Instance.UpdateTime;
+            // om.RotateLerpTime = UpdateTransformManager.Instance.UpdateTime;
+            // om.ScaleLerpTime = UpdateTransformManager.Instance.UpdateTime;
 
 
             if (CanChildMove)
@@ -289,24 +284,24 @@ public class ARManager : MonoBehaviour
                 {
                     if(children[i].GetComponent<Collider>() != null)
                     {
-                        children[i].gameObject.AddComponent<UpdateTransform>().updateID = updateID + i+1;
-                        children[i].gameObject.AddComponent<Dockable>();
-
-                        //添加MRTK手势操作
-                        ObjectManipulator om2 = children[i].gameObject.AddComponent<ObjectManipulator>();
-                        om2.OneHandRotationModeFar = RotateInOneHandType;
-                        om2.OneHandRotationModeNear = RotateInOneHandType;
-                        //旋转轴向约束
-                        RotationAxisConstraint rc2 = children[i].gameObject.AddComponent<RotationAxisConstraint>();
-                        rc2.ConstraintOnRotation = RotateAxisConstraint;
-                        //缩放约束
-                        MinMaxScaleConstraint scale2 = children[i].gameObject.AddComponent<MinMaxScaleConstraint>();
-                        scale2.ScaleMaximum = ScaleMaximum;
-                        scale2.ScaleMinimum = ScaleMinimum;
-
-                        om2.MoveLerpTime = UpdateTransformManager.Instance.UpdateTime;
-                        om2.RotateLerpTime = UpdateTransformManager.Instance.UpdateTime;
-                        om2.ScaleLerpTime = UpdateTransformManager.Instance.UpdateTime;
+                        // children[i].gameObject.AddComponent<UpdateTransform>().updateID = updateID + i+1;
+                        // children[i].gameObject.AddComponent<Dockable>();
+                        //
+                        // //添加MRTK手势操作
+                        // ObjectManipulator om2 = children[i].gameObject.AddComponent<ObjectManipulator>();
+                        // om2.OneHandRotationModeFar = RotateInOneHandType;
+                        // om2.OneHandRotationModeNear = RotateInOneHandType;
+                        // //旋转轴向约束
+                        // RotationAxisConstraint rc2 = children[i].gameObject.AddComponent<RotationAxisConstraint>();
+                        // rc2.ConstraintOnRotation = RotateAxisConstraint;
+                        // //缩放约束
+                        // MinMaxScaleConstraint scale2 = children[i].gameObject.AddComponent<MinMaxScaleConstraint>();
+                        // scale2.ScaleMaximum = ScaleMaximum;
+                        // scale2.ScaleMinimum = ScaleMinimum;
+                        //
+                        // om2.MoveLerpTime = UpdateTransformManager.Instance.UpdateTime;
+                        // om2.RotateLerpTime = UpdateTransformManager.Instance.UpdateTime;
+                        // om2.ScaleLerpTime = UpdateTransformManager.Instance.UpdateTime;
 
                     }
                 }

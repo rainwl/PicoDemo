@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-#if UNITY_EDITOR|| UNITY_WSA
-using UnityEngine.XR.WSA;
-using UnityEngine.XR.WSA.Sharing;
-#endif
+// #if UNITY_EDITOR|| UNITY_WSA
+// using UnityEngine.XR.WSA;
+// using UnityEngine.XR.WSA.Sharing;
+// #endif
 public class HoloLensAnchorManager : MonoBehaviour
 {
     public static HoloLensAnchorManager Instance;
@@ -44,16 +44,16 @@ public class HoloLensAnchorManager : MonoBehaviour
         }
         isExporting = true;
         this.onFinishedExprot =  onFinishedExprot;
-        WorldAnchor anchor= obj.GetComponent<WorldAnchor>();
-        if (anchor == null) 
-        {
-            anchor = obj.AddComponent<WorldAnchor>();
-        }
-        WorldAnchorTransferBatch batch = new WorldAnchorTransferBatch();
-        batch.AddWorldAnchor(obj.name, anchor);
-        anchorData.Clear();
-        //开始异步导出锚点
-        WorldAnchorTransferBatch.ExportAsync(batch,onDataAvailable,onCompleted);
+        // WorldAnchor anchor= obj.GetComponent<WorldAnchor>();
+        // if (anchor == null) 
+        // {
+        //     anchor = obj.AddComponent<WorldAnchor>();
+        // }
+        // WorldAnchorTransferBatch batch = new WorldAnchorTransferBatch();
+        // batch.AddWorldAnchor(obj.name, anchor);
+        // anchorData.Clear();
+        // //开始异步导出锚点
+        // WorldAnchorTransferBatch.ExportAsync(batch,onDataAvailable,onCompleted);
         Debug.Log("开始导出锚点:"+ obj.name);
     }
 
@@ -61,22 +61,22 @@ public class HoloLensAnchorManager : MonoBehaviour
     {
         anchorData.AddRange(data);
     }
-    private void onCompleted(SerializationCompletionReason completionReason)
-    {
-        if (completionReason == SerializationCompletionReason.Succeeded)
-        {
-            onFinishedExprot?.Invoke(anchorData.ToArray());
-            Debug.Log("导出锚点完成:" + anchorData.Count);
-            anchorData.Clear();
-            onFinishedExprot = null;
-        }
-        else 
-        {
-            Debug.Log("导出锚点失败:" + completionReason);
-            ShowMessageManager.Instance.ShowMessage("导出锚点失败:" + completionReason);
-        }
-        isExporting = false;
-    }
+    // private void onCompleted(SerializationCompletionReason completionReason)
+    // {
+    //     if (completionReason == SerializationCompletionReason.Succeeded)
+    //     {
+    //         onFinishedExprot?.Invoke(anchorData.ToArray());
+    //         Debug.Log("导出锚点完成:" + anchorData.Count);
+    //         anchorData.Clear();
+    //         onFinishedExprot = null;
+    //     }
+    //     else 
+    //     {
+    //         Debug.Log("导出锚点失败:" + completionReason);
+    //         ShowMessageManager.Instance.ShowMessage("导出锚点失败:" + completionReason);
+    //     }
+    //     isExporting = false;
+    // }
 
     bool isImporting;
     /// <summary>
@@ -86,47 +86,47 @@ public class HoloLensAnchorManager : MonoBehaviour
     /// <param name="obj"></param>
     public void ImportAnchorData(byte[] data,GameObject obj) 
     {
-        if (isImporting)
-        {
-            Debug.Log("正在导入中...");
-            return;
-        }
-        if (Application.isEditor)
-        {
-            Debug.Log("非HoloLens无法导入锚点!");
-            return;
-        }
-        if (obj == null)
-        {
-            Debug.Log("ImportAnchor obj 不能为空!");
-            return;
-        }
-        isImporting = true;
-        objAttachAnchor = obj;
-        WorldAnchorTransferBatch.ImportAsync(data,onComplete);
-        Debug.Log("开始导入锚点:"+data.Length);
+        // if (isImporting)
+        // {
+        //     Debug.Log("正在导入中...");
+        //     return;
+        // }
+        // if (Application.isEditor)
+        // {
+        //     Debug.Log("非HoloLens无法导入锚点!");
+        //     return;
+        // }
+        // if (obj == null)
+        // {
+        //     Debug.Log("ImportAnchor obj 不能为空!");
+        //     return;
+        // }
+        // isImporting = true;
+        // objAttachAnchor = obj;
+        // WorldAnchorTransferBatch.ImportAsync(data,onComplete);
+        // Debug.Log("开始导入锚点:"+data.Length);
     }
 
-    private void onComplete(SerializationCompletionReason completionReason, WorldAnchorTransferBatch deserializedTransferBatch)
-    {
-        if (completionReason == SerializationCompletionReason.Succeeded)
-        {
-            string anchorName = deserializedTransferBatch.GetAllIds()[0];
-            WorldAnchor anchor= objAttachAnchor.GetComponent<WorldAnchor>();
-            if (anchor != null) 
-            {
-                DestroyImmediate(anchor);
-            }
-            deserializedTransferBatch.LockObject(anchorName, objAttachAnchor);
-            Debug.Log("导入锚点完成!");
-        }
-        else 
-        {
-            Debug.Log("导入锚点失败:" + completionReason);
-        }
-        deserializedTransferBatch.Dispose();
-        isImporting = false;
-    }
+    // private void onComplete(SerializationCompletionReason completionReason, WorldAnchorTransferBatch deserializedTransferBatch)
+    // {
+    //     if (completionReason == SerializationCompletionReason.Succeeded)
+    //     {
+    //         string anchorName = deserializedTransferBatch.GetAllIds()[0];
+    //         WorldAnchor anchor= objAttachAnchor.GetComponent<WorldAnchor>();
+    //         if (anchor != null) 
+    //         {
+    //             DestroyImmediate(anchor);
+    //         }
+    //         deserializedTransferBatch.LockObject(anchorName, objAttachAnchor);
+    //         Debug.Log("导入锚点完成!");
+    //     }
+    //     else 
+    //     {
+    //         Debug.Log("导入锚点失败:" + completionReason);
+    //     }
+    //     deserializedTransferBatch.Dispose();
+    //     isImporting = false;
+    // }
 #else
 
     public void ExprotAnchorData(GameObject obj, Action<byte[]> onFinishedExprot) 

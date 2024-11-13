@@ -70,15 +70,15 @@ public class HandlerBroadcastManager : MonoBehaviour
         UpdateTransform updateTransform = UpdateTransformManager.Instance.TransformItmeList.Find((UpdateTransform t) => { return t.updateID == id; });
 
         //这里是自己加的
-        DockPosition Pos = updateTransform.GetComponent<DockPosition>();
-        updateTransform.GetComponent<Dockable>().Dock(Pos);
+        // DockPosition Pos = updateTransform.GetComponent<DockPosition>();
+        // updateTransform.GetComponent<Dockable>().Dock(Pos);
     }
 
     private void UndockByID(byte[] data)
     {
-        long id = BitConverter.ToInt64(data, 0);
-        UpdateTransform updateTransform = UpdateTransformManager.Instance.TransformItmeList.Find((UpdateTransform t) => { return t.updateID == id; });
-        updateTransform.GetComponent<Dockable>().Undock();
+        // long id = BitConverter.ToInt64(data, 0);
+        // UpdateTransform updateTransform = UpdateTransformManager.Instance.TransformItmeList.Find((UpdateTransform t) => { return t.updateID == id; });
+        // updateTransform.GetComponent<Dockable>().Undock();
     }
     private void PlayAniNextByID(byte[] data)
     {
