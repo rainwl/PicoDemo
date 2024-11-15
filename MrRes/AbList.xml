@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Abs>
+    <AB>
+        <AbType>1</AbType>
+        <AbID>1</AbID>
+        <TitleName>Axis</TitleName>
+        <Desc>A gizmo right axis for calibration</Desc>
+        <AbFileName>axis.ab</AbFileName>
+        <ObjName>Axis</ObjName>
+        <AbPicFileName>axis.png</AbPicFileName>
+    </AB>
+
+    <AB>
+        <AbType>1</AbType>
+        <AbID>2</AbID>
+        <TitleName>EarthCore</TitleName>
+        <Desc>A earth core for education</Desc>
+        <AbFileName>earth.ab</AbFileName>
+        <ObjName>Earth</ObjName>
+        <AbPicFileName>earth.png</AbPicFileName>
+    </AB>
+
+    <AB>
+        <AbType>1</AbType>
+        <AbID>3</AbID>
+        <TitleName>Heart</TitleName>
+        <Desc>A heart model for medical</Desc>
+        <AbFileName>heart.ab</AbFileName>
+        <ObjName>Heart</ObjName>
+        <AbPicFileName>heart.png</AbPicFileName>
+    </AB>
+
+    <AB>
+        <AbType>1</AbType>
+        <AbID>4</AbID>
+        <TitleName>Lander</TitleName>
+        <Desc>A lander car for spaceflight</Desc>
+        <AbFileName>lander.ab</AbFileName>
+        <ObjName>Lander</ObjName>
+        <AbPicFileName>lander.png</AbPicFileName>
+    </AB>
+
+    <AB>
+        <AbType>1</AbType>
+        <AbID>5</AbID>
+        <TitleName>Lander Dock</TitleName>
+        <Desc>A dock position for lander to dock</Desc>
+        <AbFileName>landerdock.ab</AbFileName>
+        <ObjName>LanderDock</ObjName>
+        <AbPicFileName>lander.png</AbPicFileName>
+    </AB>
+
+    <AB>
+        <AbType>1</AbType>
+        <AbID>6</AbID>
+        <TitleName>Pump</TitleName>
+        <Desc>A geer pump for industry</Desc>
+        <AbFileName>pump.ab</AbFileName>
+        <ObjName>Pump</ObjName>
+        <AbPicFileName>pump.png</AbPicFileName>
+    </AB>
+
+    <AB>
+        <AbType>1</AbType>
+        <AbID>7</AbID>
+        <TitleName>Pump Dock</TitleName>
+        <Desc>A geer pump dock position</Desc>
+        <AbFileName>pumpdock.ab</AbFileName>
+        <ObjName>PumpDock</ObjName>
+        <AbPicFileName>pump.png</AbPicFileName>
+    </AB>
+
+    <AB>
+        <AbType>1</AbType>
+        <AbID>8</AbID>
+        <TitleName>Rover</TitleName>
+        <Desc>A rover for lunar exploration</Desc>
+        <AbFileName>rover.ab</AbFileName>
+        <ObjName>Rover</ObjName>
+        <AbPicFileName>rover.png</AbPicFileName>
+    </AB>
+
+    <AB>
+        <AbType>1</AbType>
+        <AbID>9</AbID>
+        <TitleName>Rover Dock</TitleName>
+        <Desc>A rover dock position</Desc>
+        <AbFileName>roverdock.ab</AbFileName>
+        <ObjName>RoverDock</ObjName>
+        <AbPicFileName>rover.png</AbPicFileName>
+    </AB>
+
+    <AB>
+        <AbType>1</AbType>
+        <AbID>10</AbID>
+        <TitleName>Engine</TitleName>
+        <Desc>A engine for automobile</Desc>
+        <AbFileName>engine.ab</AbFileName>
+        <ObjName>Engine</ObjName>
+        <AbPicFileName>engine.png</AbPicFileName>
+    </AB>
+
+    <AB>
+        <AbType>1</AbType>
+        <AbID>11</AbID>
+        <TitleName>Engine Dock</TitleName>
+        <Desc>A engine dock for automobile</Desc>
+        <AbFileName>enginedock.ab</AbFileName>
+        <ObjName>EngineDock</ObjName>
+        <AbPicFileName>engine.png</AbPicFileName>
+    </AB>
+
+    <AB>
+        <AbType>1</AbType>
+        <AbID>14</AbID>
+        <TitleName>Reduction 1</TitleName>
+        <Desc>A reduction drive</Desc>
+        <AbFileName>new.ab</AbFileName>
+        <ObjName>New</ObjName>
+        <AbPicFileName>reduction.png</AbPicFileName>
+    </AB>
+
+    <AB>
+        <AbType>1</AbType>
+        <AbID>15</AbID>
+        <TitleName>ReductionDock 1</TitleName>
+        <Desc>A reduction drive dock</Desc>
+        <AbFileName>newdock.ab</AbFileName>
+        <ObjName>NewDock</ObjName>
+        <AbPicFileName>reduction.png</AbPicFileName>
+    </AB>
+
+
+</Abs>

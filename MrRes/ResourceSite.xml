@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Resource>
+ 
+  <ResPath>
+    <Platform>Windows</Platform>
+    <AbPath>https://rainmr.oss-cn-beijing.aliyuncs.com/AB/Windows</AbPath>
+	<PicPath>https://rainmr.oss-cn-beijing.aliyuncs.com/Pics</PicPath> 
+	<ABList>https://rainmr.oss-cn-beijing.aliyuncs.com/AbList.xml</ABList>
+  </ResPath>
+  
+    <ResPath>
+    <Platform>Android</Platform>
+    <AbPath>https://rainmr.oss-cn-beijing.aliyuncs.com/AB/Android/</AbPath>
+	<PicPath>https://rainmr.oss-cn-beijing.aliyuncs.com/Pics</PicPath> 
+	<ABList>https://rainmr.oss-cn-beijing.aliyuncs.com/AbList.xml</ABList>
+  </ResPath>
+  
+    <ResPath>
+    <Platform>iOS</Platform>
+    <AbPath>https://rainmr.oss-cn-beijing.aliyuncs.com/AB/iOS</AbPath>
+	<PicPath>https://rainmr.oss-cn-beijing.aliyuncs.com/Pics</PicPath> 
+	<ABList>https://rainmr.oss-cn-beijing.aliyuncs.com/AbList.xml </ABList>
+  </ResPath>
+  
+  <ResPath>
+    <Platform>WSA</Platform>
+    <AbPath>https://rainmr.oss-cn-beijing.aliyuncs.com/AB/WSA</AbPath> 
+	<PicPath>https://rainmr.oss-cn-beijing.aliyuncs.com/Pics</PicPath> 
+	<ABList>https://rainmr.oss-cn-beijing.aliyuncs.com/AbList.xml </ABList>
+  </ResPath>
+  
+
+ </Resource>
