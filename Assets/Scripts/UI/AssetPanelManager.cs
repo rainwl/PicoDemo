@@ -119,6 +119,7 @@ public class AssetPanelManager : MonoBehaviour
         if (group.AnyTogglesOn())
         {
             AssetItem info= group.ActiveToggles().First().transform.GetComponent<AssetItem>();
+            // todo 换成按钮的,不用toggle了
             group.SetAllTogglesOff();
 
             Vector3 position = Camera.main.transform.position + Camera.main.transform.forward * 1.5f;
