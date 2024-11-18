@@ -8,6 +8,7 @@ using UnityEngine;
 // using Microsoft.MixedReality.Toolkit.Utilities;
 // using Dock;
 using MrPlatform.Scripts.Network.Client;
+using UI;
 
 public class ARManager : MonoBehaviour
 {
@@ -252,7 +253,7 @@ public class ARManager : MonoBehaviour
 
         if (asset != null)
         {
-            GameObject go = Instantiate(asset, AssetPanelManager.Instance.AnchorRoot);
+            GameObject go = Instantiate(asset, AssetPanelManager.Instance.anchorRoot);
             go.transform.localPosition = new Vector3(pox, poy, poz);
             go.transform.localEulerAngles = new Vector3(rotx, roty, rotz);
             go.AddComponent<UpdateTransform>().updateID = updateID;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UI;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,14 +26,14 @@ namespace Dock
 
         void CreatAssetList()
         {
-            for (int i = 0; i < AssetPanelManager.Instance.Content.childCount; i++)
+            for (int i = 0; i < AssetPanelManager.Instance.content.childCount; i++)
             {
-                Destroy(AssetPanelManager.Instance.Content.GetChild(i).gameObject);
+                Destroy(AssetPanelManager.Instance.content.GetChild(i).gameObject);
             }
-            ToggleGroup group = AssetPanelManager.Instance.Content.GetComponent<ToggleGroup>();
+            ToggleGroup group = AssetPanelManager.Instance.content.GetComponent<ToggleGroup>();
             for (int i = 0; i < AssetInfoLocalList.Count; i++)
             {
-                GameObject go = Instantiate(AssetPanelManager.Instance.AssetItemPrefab, AssetPanelManager.Instance.Content);
+                GameObject go = Instantiate(AssetPanelManager.Instance.assetItemPrefab, AssetPanelManager.Instance.content);
                 go.GetComponent<Toggle>().group = group;
 
                 AssetInfo assetinfo = new AssetInfo();

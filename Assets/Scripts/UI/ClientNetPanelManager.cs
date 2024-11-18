@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using MixedReality.Toolkit.UX;
 using MrPlatform.Scripts.Network.Client;
 using TMPro;
 using UnityEngine;
@@ -12,13 +13,11 @@ namespace UI
     {
         public GameObject clientItemPrefab;
         public Transform clientList;
-
-        public GameObject NetConnectPanel;
-        public TMP_InputField IpInputField;
-
-        public Toggle ClientTog;
-
-        IEnumerator Start()
+        public GameObject netConnectPanel;
+        public TMP_InputField ipInputField;
+        public PressableButton clientToggle;
+        
+        private IEnumerator Start()
         {
             ClientNetworkManager.Instance.OnConnectResultAction += OnConnectResult;
             ClientNetworkManager.Instance.OnDisconnectAction += OnDisconnect;
@@ -30,42 +29,43 @@ namespace UI
 
         private void OnDisconnect()
         {
-            IpInputField.text = ClientNetworkManager.Instance.IP;
-            NetConnectPanel.SetActive(true);
+            ipInputField.text = ClientNetworkManager.Instance.IP;
+            netConnectPanel.SetActive(true);
             RefreshClientList(new List<ClientInfo>());
             ShowMessageManager.Instance.ShowMessage("服务器连接已断开!");
-            ClientTog.isOn = false;
+            clientToggle.ForceSetToggled(false);
         }
 
         private void OnConnectResult(bool result)
         {
-            IpInputField.text = ClientNetworkManager.Instance.IP;
-            NetConnectPanel.SetActive(!result);
+            ipInputField.text = ClientNetworkManager.Instance.IP;
+            netConnectPanel.SetActive(!result);
             //连接成功后更新用户信息
-            if (result) 
+            if (result)
             {
                 SendDataManager.Instance.SendUpdateUserInfo();
-                ClientTog.isOn = true;
+                clientToggle.ForceSetToggled(true);
             }
-            ShowMessageManager.Instance.ShowMessage("服务器连接:"+result);
+
+            ShowMessageManager.Instance.ShowMessage("服务器连接:" + result);
         }
 
-        public void Connect() 
+        public void Connect()
         {
-            if (string.IsNullOrEmpty(IpInputField.text))
+            if (string.IsNullOrEmpty(ipInputField.text))
             {
                 print("请输入IP!");
             }
-            else 
+            else
             {
-                ClientNetworkManager.Instance.IP = IpInputField.text;
+                ClientNetworkManager.Instance.IP = ipInputField.text;
                 ClientNetworkManager.Instance.ConnectServer();
             }
         }
 
-        public void ClientToggle(Toggle tog)
+        public void ClientToggle(PressableButton tog)
         {
-            if (tog.isOn)
+            if (tog.IsToggled)
             {
                 ClientNetworkManager.Instance.ConnectServer();
             }
@@ -74,26 +74,23 @@ namespace UI
                 ClientNetworkManager.Instance.DisconnectServer();
             }
         }
-        void Update()
-        {
 
-        }
-   
-        public void RefreshClientList(List<ClientInfo> list) 
+        public void RefreshClientList(List<ClientInfo> list)
         {
             for (int i = 0; i < clientList.childCount; i++)
             {
                 Destroy(clientList.GetChild(i).gameObject);
             }
+
             for (int i = 0; i < list.Count; i++)
             {
                 GameObject go = GameObject.Instantiate(clientItemPrefab, clientList);
-                go.GetComponent<ClientItem>().SetValue(list[i].UserId, list[i].UserType,list[i].UserName, list[i].UserIP);
+                go.GetComponent<ClientItem>().SetValue(list[i].UserId, list[i].UserType, list[i].UserName, list[i].UserIP);
             }
-            print("RefreshClientList:"+list.Count);
+
+            print("RefreshClientList:" + list.Count);
             LayoutRebuilder.ForceRebuildLayoutImmediate(clientList.GetComponent<RectTransform>());
             ShowMessageManager.Instance.ShowMessage("客户端列表已更新!");
         }
-
     }
 }
