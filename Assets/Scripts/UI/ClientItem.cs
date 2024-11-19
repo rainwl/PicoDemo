@@ -1,98 +1,101 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using MrPlatform.Scripts.Network.Client;
-using UnityEngine;
+﻿using MrPlatform.Scripts.Network.Client;
 using TMPro;
+using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class ClientItem : MonoBehaviour
+namespace UI
 {
-    public GameObject SubPanel;
-    public int Type;
-    public int Id;
-    public TextMeshProUGUI NameText;
-    public TextMeshProUGUI IpText;
-    public Image TypeImage;
-    public Sprite[] TypeSprits;
-    RuntimePlatform platform;
-    public void SetValue(int id, int type, string name, string ip)
+    public class ClientItem : MonoBehaviour
     {
-        Id = id;
-        Type = type;
-        int spriteIndex = 0;
-        platform = (RuntimePlatform)type;
-        if (platform == RuntimePlatform.OSXEditor || platform == RuntimePlatform.WindowsEditor
-            || platform == RuntimePlatform.WindowsPlayer || platform == RuntimePlatform.OSXPlayer) 
-        {
-            spriteIndex = 1;
-        }
-        else if (platform == RuntimePlatform.IPhonePlayer)
-        {
-            spriteIndex = 2;
-        }
-        else if (platform == RuntimePlatform.Android)
-        {
-            spriteIndex = 3;
-        }
-        else if (platform == RuntimePlatform.WSAPlayerX86)
-        {
-            spriteIndex = 4;
-        }
-        else if (platform == RuntimePlatform.WSAPlayerARM)
-        {
-            spriteIndex = 5;
-        }
-        NameText.text = name;
-        IpText.text = ip;
-        TypeImage.sprite = TypeSprits[spriteIndex];
-    }
+        public GameObject subPanel;
+        public int type;
+        public int id;
+        public TextMeshProUGUI userText;
+        public TextMeshProUGUI ipText;
+        public Image typeIcon;
+        public Sprite[] typeSprites;
+        private RuntimePlatform _platform;
 
-    private void OnEnable()
-    { 
-        LayoutRebuilder.ForceRebuildLayoutImmediate(transform.GetComponent<RectTransform>());
-    }
+        public void SetValue(int id, int type, string name, string ip)
+        {
+            this.id = id;
+            this.type = type;
+            int spriteIndex = 0;
+            _platform = (RuntimePlatform)type;
+            if (_platform == RuntimePlatform.OSXEditor
+                || _platform == RuntimePlatform.WindowsEditor
+                || _platform == RuntimePlatform.WindowsPlayer
+                || _platform == RuntimePlatform.OSXPlayer)
+            {
+                spriteIndex = 1;
+            }
+            else if (_platform == RuntimePlatform.IPhonePlayer)
+            {
+                spriteIndex = 2;
+            }
+            else if (_platform == RuntimePlatform.Android)
+            {
+                spriteIndex = 3;
+            }
+            else if (_platform == RuntimePlatform.WSAPlayerX86)
+            {
+                spriteIndex = 4;
+            }
+            else if (_platform == RuntimePlatform.WSAPlayerARM)
+            {
+                spriteIndex = 5;
+            }
 
-    public void OnClick() 
-    {
-        SubPanel.SetActive(!SubPanel.activeInHierarchy);
-        LayoutRebuilder.ForceRebuildLayoutImmediate(transform.parent.GetComponent<RectTransform>());
-    }
-
-    public void UploadAnchor() 
-    {
-        if (platform == RuntimePlatform.WSAPlayerX86 || platform == RuntimePlatform.WSAPlayerARM)
-        {
-            ARManager.Instance.UploadAnchor();
-        }
-        else
-        {
-            ShowMessageManager.Instance.ShowMessage("请选择HoloLens设备!");
-        }
-    }
-
-    public void DownLoadAnchor()
-    {
-        if (platform == RuntimePlatform.WSAPlayerX86 || platform == RuntimePlatform.WSAPlayerARM)
-        {
-            ARManager.Instance.DownLoadAnchor();
-        }
-        else
-        {
-            ShowMessageManager.Instance.ShowMessage("请选择HoloLens设备!");
-        }
-    }
-    public void Callibration() 
-    {
-        if (Id == ClientNetworkManager.Instance.UserId || ServerNetworkManager.Instance==null || !ServerNetworkManager.Instance.IsStartServer) 
-        {
-            ShowMessageManager.Instance.ShowMessage("无权限!");
-            return;
+            userText.text = name;
+            ipText.text = ip;
+            typeIcon.sprite = typeSprites[spriteIndex];
         }
 
-        ShowMessageManager.Instance.ShowSelectBox("校准客户端?",()=> 
+        private void OnEnable()
         {
-            ARManager.Instance.SendCallibrationRequest(Id);   
-        });
-    
+            LayoutRebuilder.ForceRebuildLayoutImmediate(transform.GetComponent<RectTransform>());
+        }
+
+        public void OnClick()
+        {
+            subPanel.SetActive(!subPanel.activeInHierarchy);
+            LayoutRebuilder.ForceRebuildLayoutImmediate(transform.parent.GetComponent<RectTransform>());
+        }
+
+        public void UploadAnchor()
+        {
+            if (_platform == RuntimePlatform.WSAPlayerX86 || _platform == RuntimePlatform.WSAPlayerARM)
+            {
+                ARManager.Instance.UploadAnchor();
+            }
+            else
+            {
+                ShowMessageManager.Instance.ShowMessage("Please select HMD device!");
+            }
+        }
+
+        public void DownLoadAnchor()
+        {
+            if (_platform == RuntimePlatform.WSAPlayerX86 || _platform == RuntimePlatform.WSAPlayerARM)
+            {
+                ARManager.Instance.DownLoadAnchor();
+            }
+            else
+            {
+                ShowMessageManager.Instance.ShowMessage("Please select HMD device!");
+            }
+        }
+
+        public void Calibration()
+        {
+            if (id == ClientNetworkManager.Instance.UserId || ServerNetworkManager.Instance == null || !ServerNetworkManager.Instance.IsStartServer)
+            {
+                ShowMessageManager.Instance.ShowMessage("Permission denied!");
+                return;
+            }
+
+            ShowMessageManager.Instance.ShowSelectBox("Calibration client?", () => { ARManager.Instance.SendCallibrationRequest(id); });
+        }
     }
 }
