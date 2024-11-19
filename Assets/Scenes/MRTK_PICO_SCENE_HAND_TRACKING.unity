@@ -1837,7 +1837,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 456825084}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0cd50d0de92071a47843b6bb2e2998df, type: 3}
   m_Name: 
@@ -6263,8 +6263,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 189.46326, y: 31.999954, z: 26.38652}
-  m_Center: {x: 0, y: -0.000022888184, z: 4.6067348}
+  m_Size: {x: 189.46326, y: 32, z: 26.38652}
+  m_Center: {x: 0, y: 0, z: 4.6067348}
 --- !u!114 &1138954175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8784,8 +8784,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 189.46326, y: 31.999954, z: 26.38652}
-  m_Center: {x: 0, y: -0.000022888184, z: 4.6067348}
+  m_Size: {x: 189.46326, y: 32, z: 26.38652}
+  m_Center: {x: 0, y: 0, z: 4.6067348}
 --- !u!114 &1685761370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9086,7 +9086,7 @@ MonoBehaviour:
   logText: {fileID: 854036866}
   logEnable: 1
   onlyError: 0
-  logCount: 20
+  logCount: 200
   logEnableButton: {fileID: 1138954166}
   onlyErrorButton: {fileID: 1685761361}
 --- !u!4 &1774253189
@@ -22243,7 +22243,6 @@ GameObject:
   - component: {fileID: 2047967827762829675}
   - component: {fileID: 732608441229155088}
   - component: {fileID: 4616758972179541754}
-  - component: {fileID: 9163652627849077813}
   - component: {fileID: 9163652627849077814}
   m_Layer: 5
   m_Name: Log
@@ -22490,7 +22489,19 @@ MonoBehaviour:
         m_Calls: []
   <OnClicked>k__BackingField:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1774253188}
+        m_TargetAssemblyTypeName: Common.LoggerManager, Assembly-CSharp
+        m_MethodName: OnLogTogOn
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Toggle, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   <OnEnabled>k__BackingField:
     m_PersistentCalls:
       m_Calls: []
@@ -26585,20 +26596,6 @@ MonoBehaviour:
   _MainTex: {fileID: 0}
   _ClipRect: {x: 0, y: 0, z: 0, w: 0}
   _ClipRectRadii: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &9163652627849077813
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6338500039382727107}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 887413f36d993624185e96e7a5c71622, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  seeItSayItLabel: {fileID: 5332508308044563979}
-  positionControl: {fileID: 0}
 --- !u!114 &9163652627849077814
 MonoBehaviour:
   m_ObjectHideFlags: 0
