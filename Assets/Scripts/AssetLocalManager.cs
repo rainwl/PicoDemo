@@ -26,14 +26,14 @@ namespace Dock
 
         void CreatAssetList()
         {
-            for (int i = 0; i < AssetPanelManager.Instance.content.childCount; i++)
+            for (int i = 0; i < AssetPanelManager.Instance.contentTransform.childCount; i++)
             {
-                Destroy(AssetPanelManager.Instance.content.GetChild(i).gameObject);
+                Destroy(AssetPanelManager.Instance.contentTransform.GetChild(i).gameObject);
             }
-            ToggleGroup group = AssetPanelManager.Instance.content.GetComponent<ToggleGroup>();
+            ToggleGroup group = AssetPanelManager.Instance.contentTransform.GetComponent<ToggleGroup>();
             for (int i = 0; i < AssetInfoLocalList.Count; i++)
             {
-                GameObject go = Instantiate(AssetPanelManager.Instance.assetItemPrefab, AssetPanelManager.Instance.content);
+                GameObject go = Instantiate(AssetPanelManager.Instance.assetItemPrefab, AssetPanelManager.Instance.contentTransform);
                 go.GetComponent<Toggle>().group = group;
 
                 AssetInfo assetinfo = new AssetInfo();

@@ -3,21 +3,24 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml;
+using MixedReality.Toolkit.UX;
 using MrPlatform.Scripts.Common;
 using MrPlatform.Scripts.Network.Client;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace UI
 {
     public class AssetPanelManager : MonoBehaviour
     {
-        public static AssetPanelManager Instance;
         public GameObject assetItemPrefab;
-        public Transform content;
-        public Toggle assetTog;
+        public Transform contentTransform;
+        public PressableButton assetButton;
         public Transform anchorRoot;
+
         private readonly List<AssetInfo> _assetInfoList = new();
+        public static AssetPanelManager Instance;
 
         private void Awake()
         {
@@ -88,15 +91,15 @@ namespace UI
 
         private void CreatAssetList(List<AssetInfo> list)
         {
-            for (var i = 0; i < content.childCount; i++)
+            for (var i = 0; i < contentTransform.childCount; i++)
             {
-                Destroy(content.GetChild(i).gameObject);
+                Destroy(contentTransform.GetChild(i).gameObject);
             }
 
-            var group = content.GetComponent<ToggleGroup>();
+            var group = contentTransform.GetComponent<ToggleGroup>();
             foreach (var assetInfo in list)
             {
-                var go = Instantiate(assetItemPrefab, content);
+                var go = Instantiate(assetItemPrefab, contentTransform);
                 go.GetComponent<Toggle>().group = group;
                 go.GetComponent<AssetItem>().SetValue(assetInfo);
             }
@@ -110,7 +113,7 @@ namespace UI
 
         public void LoadAsset()
         {
-            var group = content.GetComponent<ToggleGroup>();
+            var group = contentTransform.GetComponent<ToggleGroup>();
             if (group.AnyTogglesOn())
             {
                 var info = group.ActiveToggles().First().transform.GetComponent<AssetItem>();
@@ -152,7 +155,7 @@ namespace UI
                     SendDataManager.Instance.SendBroadcastAll(broadcastInfo);
                 }
 
-                assetTog.isOn = false;
+                assetButton.ForceSetToggled(false);
             }
             else
             {
@@ -169,7 +172,7 @@ namespace UI
                     Type = (int)BroadcastType.RemoveAllAsset
                 };
                 SendDataManager.Instance.SendBroadcastAll(info);
-                assetTog.isOn = false;
+                assetButton.ForceSetToggled(false);
             });
         }
 
