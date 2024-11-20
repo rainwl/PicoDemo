@@ -105,7 +105,7 @@ namespace Common
             string fileName = OssResXmlURL.Substring(OssResXmlURL.LastIndexOf('/') + 1);
             if (!File.Exists(LocalResPath + "/" + fileName))
             {
-                print(fileName + "--本地文件不存在!");
+                print(fileName + " The local file does not exist");
                 return;
             }
             Stream stream;
@@ -162,7 +162,7 @@ namespace Common
             string fileName = OssAbListXmlURL.Substring(OssAbListXmlURL.LastIndexOf('/') + 1);
             if (!File.Exists(LocalResPath + "/" + fileName))
             {
-                print(fileName + "--本地文件不存在!");
+                print(fileName + "The local file does not exist");
                 return;
             }
             Stream stream;
@@ -181,9 +181,9 @@ namespace Common
                 {
                     if (ab.Name == "AbFileName")
                     {
-                        if (!File.Exists(LocalAssetBundlePath + "/" + ab.InnerText))
+                        if (!File.Exists(LocalAssetBundlePath + ab.InnerText))
                         {
-                            StartCoroutine(DownloadResource(OssAbPath+"/"+ ab.InnerText,LocalAssetBundlePath));
+                            StartCoroutine(DownloadResource(OssAbPath+ ab.InnerText,LocalAssetBundlePath));
                         }
                     }
                     else if (ab.Name == "AbPicFileName")
@@ -195,7 +195,7 @@ namespace Common
                     }
                 }
             }
-            print("资源读取完成!");
+            print("Resource read complete");
             AssetPanelManager.Instance.ReadLocalAbXml();
         }
         /// <summary>
@@ -212,7 +212,7 @@ namespace Common
             fileStream.Write(data, 0, data.Length);
             fileStream.Close();
             fileStream.Dispose();
-            print(fileName + "--下载完成!");
+            print(fileName + " download completes");
         }
 
         /// <summary>
@@ -231,7 +231,7 @@ namespace Common
             string fileName = url.Substring(url.LastIndexOf('/')+1);
             if (!string.IsNullOrEmpty(www.error))
             {
-                print(fileName + " download error:" + www.error);
+                print(fileName + " download error:" + www.error + " " + url);
             }
             else 
             {

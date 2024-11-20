@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: Rain
-  productName: MyDemo
+  productName: PicoDemo
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.12156863, g: 0.12156863, b: 0.1254902, a: 1}
@@ -140,7 +140,12 @@ PlayerSettings:
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
   bundleVersion: 1.0
-  preloadedAssets: []
+  preloadedAssets:
+  - {fileID: 11400000, guid: eee44e6517f9c4041bec811b8632d67b, type: 2}
+  - {fileID: -2333080257179527124, guid: 3942f335f02974147aebc6dc80df5fbb, type: 2}
+  - {fileID: 11400000, guid: 8f49b54f4ba84c944a429d1194493c67, type: 2}
+  - {fileID: -3237086123579075149, guid: bf1bfcf514933d442871cde6cd16dd8c, type: 2}
+  - {fileID: 11400000, guid: d5fc47875ea4c114894516e9b55989ae, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -176,7 +181,7 @@ PlayerSettings:
   stripEngineCode: 1
   iPhoneStrippingLevel: 0
   iPhoneScriptCallOptimization: 0
-  ForceInternetPermission: 0
+  ForceInternetPermission: 1
   ForceSDCardPermission: 0
   CreateWallpaper: 0
   APKExpansionFiles: 0

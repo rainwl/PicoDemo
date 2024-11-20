@@ -88,8 +88,8 @@ namespace Common
 
             if (logText != null)
             {
-                _rect.sizeDelta = new Vector2(_rect.sizeDelta.x, logText.preferredHeight + 50);
-                _rect.anchoredPosition = new Vector2(_rect.anchoredPosition.x, _rect.sizeDelta.y);
+                // _rect.sizeDelta = new Vector2(_rect.sizeDelta.x, logText.preferredHeight + 50);
+                // _rect.anchoredPosition = new Vector2(_rect.anchoredPosition.x, _rect.sizeDelta.y);
             }
         }
 
