@@ -1,4 +1,5 @@
-﻿using MrPlatform.Scripts.Network.Client;
+﻿using Common;
+using MrPlatform.Scripts.Network.Client;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
