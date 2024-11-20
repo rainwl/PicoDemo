@@ -1,22 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using MixedReality.Toolkit.UX;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class SettingPanel : MonoBehaviour
+namespace UI
 {
-    public Toggle SettingTog;
-    void Start()
+    public class SettingPanel : MonoBehaviour
     {
-        
-    }
+        public GameObject panel;
 
-    public void OnCallibrationClick() 
-    {
-        SettingTog.isOn = false;
-    }
-    void Update()
-    {
-        
+        public void OnCalibrationClick() 
+        {
+           panel.SetActive(false);
+        }
     }
 }

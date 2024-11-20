@@ -5,7 +5,7 @@ using UI;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace MrPlatform.Scripts.Common
+namespace Common
 {
     public class AssetBundleManager : MonoBehaviour
     {

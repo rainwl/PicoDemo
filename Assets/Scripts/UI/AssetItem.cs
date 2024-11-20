@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using TMPro;
 using System.IO;
-using MrPlatform.Scripts.Common;
+using Common;
 using UI;
 using UnityEngine.Serialization;
 
