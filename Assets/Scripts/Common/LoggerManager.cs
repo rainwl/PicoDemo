@@ -93,9 +93,9 @@ namespace Common
             }
         }
 
-        public void OnLogTogOn(Toggle tog)
+        public void OnLogTogOn(PressableButton tog)
         {
-            if (tog.isOn)
+            if (tog.IsToggled)
             {
                 _rect.sizeDelta = new Vector2(_rect.sizeDelta.x, logText.preferredHeight + 50);
                 _rect.anchoredPosition = new Vector2(_rect.anchoredPosition.x, _rect.sizeDelta.y);
