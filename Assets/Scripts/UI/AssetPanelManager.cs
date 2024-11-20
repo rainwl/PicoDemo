@@ -136,7 +136,7 @@ namespace UI
                     {
                         Type = (int)BroadcastType.CrteateAssetByID
                     };
-                    var assetID = info.AbId;
+                    var assetID = info.abId;
                     var updateID = BitConverter.ToInt64(Guid.NewGuid().ToByteArray(), 0);
 
                     var data = new byte[36];

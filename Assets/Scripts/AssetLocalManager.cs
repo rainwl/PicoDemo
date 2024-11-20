@@ -43,7 +43,7 @@ namespace Dock
                 assetinfo.Desc = AssetInfoLocalList[i].Desc;
 
                 go.GetComponent<AssetItem>().SetValue(assetinfo);
-                go.GetComponent<AssetItem>().ThumbImage.sprite = AssetInfoLocalList[i].AbPicSprite;
+                go.GetComponent<AssetItem>().thumbImage.sprite = AssetInfoLocalList[i].AbPicSprite;
             }
         }
         public GameObject GetAsset(int assetID)
