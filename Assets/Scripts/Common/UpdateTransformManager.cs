@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Common;
 using MrPlatform.Scripts.Network.Client;
+using Network.Client;
 using UnityEngine;
 
 public class UpdateTransformManager : MonoBehaviour

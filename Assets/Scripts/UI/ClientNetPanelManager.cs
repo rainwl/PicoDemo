@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Common;
 using MixedReality.Toolkit.UX;
 using MrPlatform.Scripts.Network.Client;
+using Network.Client;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -33,7 +34,7 @@ namespace UI
             ipInputField.text = ClientNetworkManager.Instance.IP;
             netConnectPanel.SetActive(true);
             RefreshClientList(new List<ClientInfo>());
-            ShowMessageManager.Instance.ShowMessage("服务器连接已断开!");
+            // ShowMessageManager.Instance.ShowMessage("服务器连接已断开!");
             clientToggle.ForceSetToggled(false);
         }
 
@@ -48,7 +49,7 @@ namespace UI
                 clientToggle.ForceSetToggled(true);
             }
 
-            ShowMessageManager.Instance.ShowMessage("服务器连接:" + result);
+            // ShowMessageManager.Instance.ShowMessage("服务器连接:" + result);
         }
 
         public void Connect()
@@ -91,7 +92,7 @@ namespace UI
 
             print("RefreshClientList:" + list.Count);
             LayoutRebuilder.ForceRebuildLayoutImmediate(clientList.GetComponent<RectTransform>());
-            ShowMessageManager.Instance.ShowMessage("客户端列表已更新!");
+            // ShowMessageManager.Instance.ShowMessage("客户端列表已更新!");
         }
     }
 }

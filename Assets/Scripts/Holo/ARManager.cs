@@ -8,6 +8,7 @@ using UnityEngine;
 // using Microsoft.MixedReality.Toolkit.Utilities;
 // using Dock;
 using MrPlatform.Scripts.Network.Client;
+using Network.Client;
 using UI;
 
 public class ARManager : MonoBehaviour

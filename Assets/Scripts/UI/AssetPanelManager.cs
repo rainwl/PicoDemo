@@ -6,6 +6,8 @@ using System.Xml;
 using Common;
 using MixedReality.Toolkit.UX;
 using MrPlatform.Scripts.Network.Client;
+using Network.Client;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -96,11 +98,13 @@ namespace UI
                 Destroy(contentTransform.GetChild(i).gameObject);
             }
 
-            var group = contentTransform.GetComponent<ToggleGroup>();
+            // var group = contentTransform.GetComponent<ToggleGroup>();
+            var pressableToggleGroup = contentTransform.GetComponent<PressableToggleGroup>();
             foreach (var assetInfo in list)
             {
                 var go = Instantiate(assetItemPrefab, contentTransform);
-                go.GetComponent<Toggle>().group = group;
+                pressableToggleGroup.pressableToggles.Add(go.GetComponentInChildren<PressableButton>());
+                // go.GetComponent<Toggle>().group = group;
                 go.GetComponent<AssetItem>().SetValue(assetInfo);
             }
         }
@@ -113,13 +117,15 @@ namespace UI
 
         public void LoadAsset()
         {
-            var group = contentTransform.GetComponent<ToggleGroup>();
-            if (group.AnyTogglesOn())
+            // var group = contentTransform.GetComponent<ToggleGroup>();
+            var pressableToggleGroup = contentTransform.GetComponent<PressableToggleGroup>();
+            if (pressableToggleGroup.AnyPressableTogglesOn())
             {
-                var info = group.ActiveToggles().First().transform.GetComponent<AssetItem>();
-                // todo 换成按钮的,不用toggle了
-                group.SetAllTogglesOff();
-
+                // var info = group.ActiveToggles().First().transform.GetComponent<AssetItem>();
+                var info = pressableToggleGroup.ActivePressableToggles().First().transform.parent.GetComponent<AssetItem>();
+                
+                pressableToggleGroup.SetAllPressableTogglesOff();
+                
                 if (Camera.main != null)
                 {
                     var position = Camera.main.transform.position + Camera.main.transform.forward * 1.5f;
@@ -132,6 +138,7 @@ namespace UI
                     Destroy(go, 0.1f);
                     // Notifies all clients to load the asset
 
+                    print("LoadAsset");
                     var broadcastInfo = new BroadcastInfo
                     {
                         Type = (int)BroadcastType.CrteateAssetByID
@@ -152,28 +159,32 @@ namespace UI
                     Array.Copy(BitConverter.GetBytes(go.transform.localEulerAngles.z), 0, data, 32, 4);
 
                     broadcastInfo.Data = data;
+                    print("broadcastInfo.Data = data;");
                     SendDataManager.Instance.SendBroadcastAll(broadcastInfo);
+                    print("SendDataManager.Instance.SendBroadcastAll(broadcastInfo);");
                 }
 
                 assetButton.ForceSetToggled(false);
             }
             else
             {
-                ShowMessageManager.Instance.ShowMessage("Please select a resource\n!");
+                print("Please select a resource\\n!");
+                // ShowMessageManager.Instance.ShowMessage("Please select a resource\n!");
             }
         }
 
         public void RemoveAllAsset()
         {
-            ShowMessageManager.Instance.ShowSelectBox("Whether to delete all resources?", () =>
-            {
+            // ShowMessageManager.Instance.ShowSelectBox("Whether to delete all resources?", () =>
+            // {
                 var info = new BroadcastInfo
                 {
                     Type = (int)BroadcastType.RemoveAllAsset
                 };
                 SendDataManager.Instance.SendBroadcastAll(info);
                 assetButton.ForceSetToggled(false);
-            });
+                print("RemoveAllAsset");
+            // });
         }
 
         public void RemoveAssetByID(long id)

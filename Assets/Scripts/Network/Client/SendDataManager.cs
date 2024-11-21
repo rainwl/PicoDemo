@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using MrPlatform.Scripts.Network.Client;
+using UnityEngine;
 
-namespace MrPlatform.Scripts.Network.Client
+namespace Network.Client
 {
     public class SendDataManager : MonoBehaviour
     {
