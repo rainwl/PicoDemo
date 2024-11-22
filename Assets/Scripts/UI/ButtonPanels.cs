@@ -8,6 +8,7 @@ namespace UI
     {
         public PressableButton[] buttons;
         public GameObject[] panels;
+        public GameObject[] backPlates;
 
         private void Start()
         {
@@ -27,6 +28,14 @@ namespace UI
             }
 
             panels[index].SetActive(!isActive);
+
+            var isActive2 = backPlates[index].activeSelf;
+            foreach (var back in backPlates)
+            {
+                back.SetActive(false);
+            }
+
+            backPlates[index].SetActive(!isActive2);
         }
     }
 }
