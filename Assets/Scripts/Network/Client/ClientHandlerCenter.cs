@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Common;
+using Network.Client;
 using UnityEngine;
 
 namespace MrPlatform.Scripts.Network.Client

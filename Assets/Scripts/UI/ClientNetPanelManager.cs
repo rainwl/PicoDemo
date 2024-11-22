@@ -31,7 +31,7 @@ namespace UI
 
         private void OnDisconnect()
         {
-            ipInputField.text = ClientNetworkManager.Instance.IP;
+            ipInputField.text = ClientNetworkManager.Instance.ip;
             netConnectPanel.SetActive(true);
             RefreshClientList(new List<ClientInfo>());
             // ShowMessageManager.Instance.ShowMessage("服务器连接已断开!");
@@ -40,12 +40,12 @@ namespace UI
 
         private void OnConnectResult(bool result)
         {
-            ipInputField.text = ClientNetworkManager.Instance.IP;
+            ipInputField.text = ClientNetworkManager.Instance.ip;
             netConnectPanel.SetActive(!result);
             //连接成功后更新用户信息
             if (result)
             {
-                SendDataManager.Instance.SendUpdateUserInfo();
+                SendDataManager.SendUpdateUserInfo();
                 clientToggle.ForceSetToggled(true);
             }
 
@@ -60,7 +60,7 @@ namespace UI
             }
             else
             {
-                ClientNetworkManager.Instance.IP = ipInputField.text;
+                ClientNetworkManager.Instance.ip = ipInputField.text;
                 ClientNetworkManager.Instance.ConnectServer();
             }
         }

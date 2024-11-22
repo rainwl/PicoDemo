@@ -160,7 +160,7 @@ namespace UI
 
                     broadcastInfo.Data = data;
                     print("broadcastInfo.Data = data;");
-                    SendDataManager.Instance.SendBroadcastAll(broadcastInfo);
+                    SendDataManager.SendBroadcastAll(broadcastInfo);
                     print("SendDataManager.Instance.SendBroadcastAll(broadcastInfo);");
                 }
 
@@ -181,7 +181,7 @@ namespace UI
                 {
                     Type = (int)BroadcastType.RemoveAllAsset
                 };
-                SendDataManager.Instance.SendBroadcastAll(info);
+                SendDataManager.SendBroadcastAll(info);
                 assetButton.ForceSetToggled(false);
                 print("RemoveAllAsset");
             // });
@@ -194,7 +194,7 @@ namespace UI
                 Type = (int)BroadcastType.RemoveAssetByID,
                 Data = BitConverter.GetBytes(id)
             };
-            SendDataManager.Instance.SendBroadcastAll(info);
+            SendDataManager.SendBroadcastAll(info);
         }
     }
 

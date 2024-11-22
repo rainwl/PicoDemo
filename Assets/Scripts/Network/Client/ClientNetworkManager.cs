@@ -4,111 +4,96 @@ using System.Collections.Generic;
 using System.Net;
 using UnityEngine;
 
-namespace MrPlatform.Scripts.Network.Client
+namespace Network.Client
 {
     public class ClientNetworkManager : MonoBehaviour
     {
         public static ClientNetworkManager Instance;
-        SocketClient client;
-        public string IP;
-        public int Port;
-        public string IpKey = "IpKey";
-        bool isOnConnectResult; 
-        bool isOnDisconnect;
+        private SocketClient _client;
+        public string ip;
+        public int port;
+        public string ipKey = "IpKey";
+        private bool _isOnConnectResult;
+        private bool _isOnDisconnect;
         public Action<bool> OnConnectResultAction;
         public Action OnDisconnectAction;
         public int UserId { get; internal set; }
 
         public bool isAutoConnect;
-        public int AutoConnectTime = 20;
+        public int autoConnectTime = 20;
+        private bool _connectResult;
 
-        public Queue<byte[]> ReceiveDataQueue = new Queue<byte[]>();
+        public readonly Queue<byte[]> ReceiveDataQueue = new();
+
         private void Awake()
         {
             Instance = this;
             Init();
-            if (PlayerPrefs.HasKey(IpKey)) 
+            if (PlayerPrefs.HasKey(ipKey))
             {
-                IP = PlayerPrefs.GetString(IpKey);
-                print("PlayerPrefs get ip:"+ IP);
+                ip = PlayerPrefs.GetString(ipKey);
+                print("PlayerPrefs get ip:" + ip);
             }
         }
 
-        void Start()
-        {   
-            if (isAutoConnect) 
+        private void Start()
+        {
+            if (isAutoConnect)
             {
                 StartCoroutine(AutoConnect());
             }
-
         }
 
-        /// <summary>
-        /// 实例化客户端
-        /// </summary>
-        public void Init() 
+        private void Init()
         {
-            client = new SocketClient();
-            client.OnConnect += OnConnect;
-            client.OnDisconnect += OnDisconnect;
-            client.OnReceiveData += OnReceiveData;
+            _client = new SocketClient();
+            _client.OnConnect += OnConnect;
+            _client.OnDisconnect += OnDisconnect;
+            _client.OnReceiveData += OnReceiveData;
         }
 
-        /// <summary>
-        /// 连接服务器
-        /// </summary>
-        public void ConnectServer() 
+
+        public void ConnectServer()
         {
             IPAddress ipAddress;
-            if (!IPAddress.TryParse(IP, out ipAddress)|| Port<0 || Port > 65535) 
+            if (!IPAddress.TryParse(ip, out ipAddress) || port < 0 || port > 65535)
             {
                 Debug.LogError("ip or port is wrong!");
                 return;
             }
-            client.ConnectServer(IP,Port);
-        }
-        /// <summary>
-        /// 断开连接
-        /// </summary>
-        public void DisconnectServer() 
-        {
-            client.Close();
+
+            _client.ConnectServer(ip, port);
         }
 
-        /// <summary>
-        /// 检测断开连接后自动连接
-        /// </summary>
-        /// <returns></returns>
-        IEnumerator AutoConnect() 
+        public void DisconnectServer()
+        {
+            _client.Close();
+        }
+
+        private IEnumerator AutoConnect()
         {
             while (true)
             {
-                yield return new WaitForSeconds(AutoConnectTime);
-                if (!client.Connected) ConnectServer();
+                yield return new WaitForSeconds(autoConnectTime);
+                print("auto connect");
+                if (!_client.Connected) ConnectServer();
             }
         }
 
-        /// <summary>
-        /// 向服务器发送数据
-        /// </summary>
-        /// <param name="model"></param>
+
         internal void Send(DataModel model)
         {
-            if (client.Connected)
+            if (_client.Connected)
             {
-                client.Send(DataCodec.Encode(model));
+                _client.Send(DataCodec.Encode(model));
             }
-            else 
+            else
             {
                 print("offline!");
             }
-       
         }
 
-        /// <summary>
-        /// 收到消息回调
-        /// </summary>
-        /// <param name="data"></param>
+
         private void OnReceiveData(byte[] data)
         {
             lock (ReceiveDataQueue)
@@ -117,13 +102,11 @@ namespace MrPlatform.Scripts.Network.Client
             }
         }
 
-        /// <summary>
-        /// 断开连接回调
-        /// </summary>
+
         private void OnDisconnect()
         {
             print("OnDisconnect");
-            isOnDisconnect = true;
+            _isOnDisconnect = true;
         }
 
         private void OnDestroy()
@@ -131,53 +114,44 @@ namespace MrPlatform.Scripts.Network.Client
             DisconnectServer();
         }
 
-        bool connectResult;
-
-
-        /// <summary>
-        /// 连接结果回调
-        /// </summary>
-        /// <param name="result"></param>
         private void OnConnect(bool result)
         {
-            print("OnConnect:"+result);
-            connectResult = result;
-            isOnConnectResult = true;
-            if (result) 
+            print("OnConnect:" + result);
+            _connectResult = result;
+            _isOnConnectResult = true;
+            if (result)
             {
-                PlayerPrefs.SetString(IpKey,IP);
+                PlayerPrefs.SetString(ipKey, ip);
                 PlayerPrefs.Save();
-                print("PlayerPrefs save ip:"+IP);
+                print("PlayerPrefs save ip:" + ip);
                 StartCoroutine(SendHeart());
             }
         }
 
-        /// <summary>
-        /// 发送心跳包
-        /// </summary>
-        /// <returns></returns>
-        IEnumerator SendHeart() 
+        private IEnumerator SendHeart()
         {
             print("start heart...");
-            while (client.Connected)
+            while (_client.Connected)
             {
                 Send(new DataModel());
                 yield return new WaitForSeconds(2);
             }
+
             print("stop heart!");
         }
 
-        void Update()
+        private void Update()
         {
-            if (isOnDisconnect) 
+            if (_isOnDisconnect)
             {
-                isOnDisconnect = false;
+                _isOnDisconnect = false;
                 OnDisconnectAction?.Invoke();
             }
-            if (isOnConnectResult) 
+
+            if (_isOnConnectResult)
             {
-                isOnConnectResult = false;
-                OnConnectResultAction?.Invoke(connectResult);
+                _isOnConnectResult = false;
+                OnConnectResultAction?.Invoke(_connectResult);
             }
         }
     }

@@ -104,7 +104,7 @@ public class ARManager : MonoBehaviour
         info.Type = (int)BroadcastType.ConfirmCallibration;
         info.UserId = ClientNetworkManager.Instance.UserId;
         info.PeerId = serverClientId;
-        SendDataManager.Instance.SendBroadcastById(info);
+        SendDataManager.SendBroadcastById(info);
     }
 
     public GameObject AniButtons;
@@ -124,21 +124,21 @@ public class ARManager : MonoBehaviour
         BroadcastInfo info = new BroadcastInfo();
         info.Type = (int)BroadcastType.PlayAniNextByID;
         info.Data = BitConverter.GetBytes(selectedUpdateTransform.updateID);
-        SendDataManager.Instance.SendBroadcastAll(info);
+        SendDataManager.SendBroadcastAll(info);
     }
     public void PlayAniLast()
     {
         BroadcastInfo info = new BroadcastInfo();
         info.Type = (int)BroadcastType.PlyAniLastByID;
         info.Data = BitConverter.GetBytes(selectedUpdateTransform.updateID);
-        SendDataManager.Instance.SendBroadcastAll(info);
+        SendDataManager.SendBroadcastAll(info);
     }
     public void Dock()
     {
         BroadcastInfo info = new BroadcastInfo();
         info.Type = (int)BroadcastType.DockByID;
         info.Data = BitConverter.GetBytes(selectedUpdateTransform.updateID);
-        SendDataManager.Instance.SendBroadcastAll(info);
+        SendDataManager.SendBroadcastAll(info);
     }
 
     public void Undock()
@@ -146,7 +146,7 @@ public class ARManager : MonoBehaviour
         BroadcastInfo info = new BroadcastInfo();
         info.Type = (int)BroadcastType.UndockByID;
         info.Data = BitConverter.GetBytes(selectedUpdateTransform.updateID);
-        SendDataManager.Instance.SendBroadcastAll(info);
+        SendDataManager.SendBroadcastAll(info);
     }
     private void Update()
     {
@@ -189,7 +189,7 @@ public class ARManager : MonoBehaviour
 
     internal void DownLoadAnchor()
     {
-        SendDataManager.Instance.SendDownloadAnchor();
+        SendDataManager.SendDownloadAnchor();
         ClientHandlerCenter.Instance.OnOnDownloadAnchorData = OnOnDownloadAnchorData;
     }
     void OnOnDownloadAnchorData(byte[] data) 
@@ -201,7 +201,7 @@ public class ARManager : MonoBehaviour
     internal void UploadAnchor()
     {
         //SendDataManager.Instance.SendUploadAnchor(new byte[1024]);
-        HoloLensAnchorManager.Instance.ExprotAnchorData(AnchorRoot.gameObject, SendDataManager.Instance.SendUploadAnchor);
+        HoloLensAnchorManager.Instance.ExprotAnchorData(AnchorRoot.gameObject, SendDataManager.SendUploadAnchor);
     }
 
  
@@ -324,7 +324,7 @@ public class ARManager : MonoBehaviour
         info.UserId = ClientNetworkManager.Instance.UserId;
         info.PeerId = serverClientId;
         info.Data = data;
-        SendDataManager.Instance.SendBroadcastById(info);
+        SendDataManager.SendBroadcastById(info);
     }
     internal void OnStartHoloview(BroadcastInfo info)
     {

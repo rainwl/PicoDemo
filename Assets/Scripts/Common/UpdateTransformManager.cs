@@ -47,7 +47,7 @@ public class UpdateTransformManager : MonoBehaviour
             BroadcastInfo info = new BroadcastInfo();
             info.Type = (int)BroadcastType.UpdateTransform;
             info.Data = data.ToArray();
-            SendDataManager.Instance.SendBroadcastAll(info);
+            SendDataManager.SendBroadcastAll(info);
         }
     }
 

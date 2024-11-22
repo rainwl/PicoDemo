@@ -1,5 +1,4 @@
-﻿using MrPlatform.Scripts.Network.Client;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Network.Client
 {
@@ -12,43 +11,45 @@ namespace Network.Client
             Instance = this;
         }
 
-        public void SendDownloadAnchor()
+        public static void SendDownloadAnchor()
         {
-            DataModel model = new DataModel(DataType.TPYE_MR, DataRequest.MR_DOWNLOAD_ANCHOR);
+            var model = new DataModel(DataType.TPYE_MR, DataRequest.MR_DOWNLOAD_ANCHOR);
             ClientNetworkManager.Instance.Send(model);
         }
 
-        public void SendUploadAnchor(byte[] data)
+        public static void SendUploadAnchor(byte[] data)
         {
-            DataModel model = new DataModel(DataType.TPYE_MR, DataRequest.MR_UPLOAD_ANCHOR, data);
+            var model = new DataModel(DataType.TPYE_MR, DataRequest.MR_UPLOAD_ANCHOR, data);
             ClientNetworkManager.Instance.Send(model);
         }
 
-        public void SendBroadcastAll(BroadcastInfo info)
+        public static void SendBroadcastAll(BroadcastInfo info)
         {
-            DataModel model = new DataModel(DataType.TYPE_BROADCAST, DataRequest.BROADCAST_ALL, MessageCodec.ObjectToBytes(info));
+            var model = new DataModel(DataType.TYPE_BROADCAST, DataRequest.BROADCAST_ALL, MessageCodec.ObjectToBytes(info));
             ClientNetworkManager.Instance.Send(model);
         }
 
-        public void SendBroadcastById(BroadcastInfo info)
+        public static void SendBroadcastById(BroadcastInfo info)
         {
             DataModel model = new DataModel(DataType.TYPE_BROADCAST, DataRequest.BROADCAST_BY_ID, MessageCodec.ObjectToBytes(info));
             ClientNetworkManager.Instance.Send(model);
         }
 
-        public void SendUpdateUserInfo()
+        public static void SendUpdateUserInfo()
         {
-            ClientInfo info = new ClientInfo();
-            info.UserType = (int)Application.platform;
-            info.UserName = SystemInfo.deviceName;
-            byte[] data = MessageCodec.ObjectToBytes(info);
-            DataModel model = new DataModel(DataType.TPYE_MR, DataRequest.MR_UPDATE_USERINFO, data);
+            var info = new ClientInfo
+            {
+                UserType = (int)Application.platform,
+                UserName = SystemInfo.deviceName
+            };
+            var data = MessageCodec.ObjectToBytes(info);
+            var model = new DataModel(DataType.TPYE_MR, DataRequest.MR_UPDATE_USERINFO, data);
             ClientNetworkManager.Instance.Send(model);
         }
 
         public void SendGetUserList()
         {
-            DataModel model = new DataModel(DataType.TPYE_MR, DataRequest.MR_GET_CLIENTLIST);
+            var model = new DataModel(DataType.TPYE_MR, DataRequest.MR_GET_CLIENTLIST);
             ClientNetworkManager.Instance.Send(model);
         }
     }

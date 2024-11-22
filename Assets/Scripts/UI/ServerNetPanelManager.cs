@@ -7,6 +7,7 @@ using System.Net.Sockets;
 using UnityEngine.UI;
 using System;
 using MrPlatform.Scripts.Network.Client;
+using Network.Client;
 
 public class ServerNetPanelManager : MonoBehaviour
 {
@@ -17,9 +18,9 @@ public class ServerNetPanelManager : MonoBehaviour
         GetIp();
         SwitchIp();
 
-        if (!IpList.Contains(ClientNetworkManager.Instance.IP)) 
+        if (!IpList.Contains(ClientNetworkManager.Instance.ip)) 
         {
-            ClientNetworkManager.Instance.IP = IpList[0];
+            ClientNetworkManager.Instance.ip = IpList[0];
         }
     }
 
