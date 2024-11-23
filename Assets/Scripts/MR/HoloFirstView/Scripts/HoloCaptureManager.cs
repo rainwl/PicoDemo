@@ -3,6 +3,7 @@ using HoloCapture;
 #endif
 
 using System.Collections.Generic;
+using MR;
 using UnityEngine;
 public class HoloCaptureManager : MonoBehaviour
 {

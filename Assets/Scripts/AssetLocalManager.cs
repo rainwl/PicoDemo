@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using MR;
 using UI;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,7 +20,7 @@ namespace Dock
 
         void Start()
         {
-            if (!ARManager.Instance.UseLocalAsset) return;
+            if (!ARManager.Instance.useLocalAsset) return;
 
             CreatAssetList();
         }

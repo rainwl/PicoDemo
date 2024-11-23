@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.IO;
 using System.Xml;
+using MR;
 using UI;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -44,7 +45,7 @@ namespace Common
 
         private void Start()
         {
-            if (ARManager.Instance.UseLocalAsset) return;
+            if (ARManager.Instance.useLocalAsset) return;
             if (Application.internetReachability == NetworkReachability.NotReachable)
             {
                 //读取本地资源

@@ -1,5 +1,5 @@
 ﻿using Common;
-using MrPlatform.Scripts.Network.Client;
+using MR;
 using Network.Client;
 using TMPro;
 using UnityEngine;

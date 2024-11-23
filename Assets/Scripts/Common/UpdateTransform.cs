@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 using MixedReality.Toolkit;
+using MR;
 using Unity.XR.PXR;
 using UnityEngine.UIElements;
 using UnityEngine.XR.Interaction.Toolkit;

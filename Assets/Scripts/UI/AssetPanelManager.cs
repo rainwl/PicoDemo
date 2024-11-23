@@ -5,12 +5,8 @@ using System.Linq;
 using System.Xml;
 using Common;
 using MixedReality.Toolkit.UX;
-using MrPlatform.Scripts.Network.Client;
 using Network.Client;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
 
 namespace UI
 {

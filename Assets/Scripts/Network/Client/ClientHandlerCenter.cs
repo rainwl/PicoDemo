@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Common;
-using Network.Client;
 using UnityEngine;
 
-namespace MrPlatform.Scripts.Network.Client
+namespace Network.Client
 {
     public class ClientHandlerCenter : MonoBehaviour
     {
@@ -87,7 +86,7 @@ namespace MrPlatform.Scripts.Network.Client
         {
             var result = (Result)BitConverter.ToInt32(model.Message, 0);
             print("OnUploadAnchor result:" + result);
-            ShowMessageManager.Instance.ShowMessage("上传锚点:" + result);
+            // ShowMessageManager.Instance.ShowMessage("上传锚点:" + result);
         }
 
         private void OnDownloadAnchor(DataModel model)
@@ -96,11 +95,11 @@ namespace MrPlatform.Scripts.Network.Client
             {
                 var result = (Result)BitConverter.ToInt32(model.Message, 0);
                 print("OnDownloadAnchor result:" + result);
-                ShowMessageManager.Instance.ShowMessage("锚点下载:" + result);
+                // ShowMessageManager.Instance.ShowMessage("锚点下载:" + result);
             }
             else if (model.Message.Length > 4)
             {
-                ShowMessageManager.Instance.ShowMessage("下载成功!");
+                // ShowMessageManager.Instance.ShowMessage("下载成功!");
                 print("OnDownloadAnchor length:" + model.Message.Length);
                 OnOnDownloadAnchorData?.Invoke(model.Message);
             }

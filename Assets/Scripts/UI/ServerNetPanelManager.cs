@@ -6,7 +6,6 @@ using System.Net;
 using System.Net.Sockets;
 using UnityEngine.UI;
 using System;
-using MrPlatform.Scripts.Network.Client;
 using Network.Client;
 
 public class ServerNetPanelManager : MonoBehaviour

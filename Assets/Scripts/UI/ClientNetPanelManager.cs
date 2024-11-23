@@ -1,12 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Common;
 using MixedReality.Toolkit.UX;
-using MrPlatform.Scripts.Network.Client;
 using Network.Client;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace UI
