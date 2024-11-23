@@ -119,9 +119,9 @@ namespace UI
             {
                 // var info = group.ActiveToggles().First().transform.GetComponent<AssetItem>();
                 var info = pressableToggleGroup.ActivePressableToggles().First().transform.parent.GetComponent<AssetItem>();
-                
+
                 pressableToggleGroup.SetAllPressableTogglesOff();
-                
+
                 if (Camera.main != null)
                 {
                     var position = Camera.main.transform.position + Camera.main.transform.forward * 1.5f;
@@ -165,14 +165,14 @@ namespace UI
             else
             {
                 print("Please select a resource\\n!");
-                // ShowMessageManager.Instance.ShowMessage("Please select a resource\n!");
+                ShowMessageManager.Instance.ShowMessage("Please select a resource\n!");
             }
         }
 
         public void RemoveAllAsset()
         {
-            // ShowMessageManager.Instance.ShowSelectBox("Whether to delete all resources?", () =>
-            // {
+            ShowMessageManager.Instance.ShowSelectBox("Whether to delete all resources?", () =>
+            {
                 var info = new BroadcastInfo
                 {
                     Type = (int)BroadcastType.RemoveAllAsset
@@ -180,7 +180,7 @@ namespace UI
                 SendDataManager.SendBroadcastAll(info);
                 assetButton.ForceSetToggled(false);
                 print("RemoveAllAsset");
-            // });
+            });
         }
 
         public void RemoveAssetByID(long id)

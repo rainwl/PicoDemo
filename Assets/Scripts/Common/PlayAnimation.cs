@@ -19,7 +19,7 @@ public class PlayAnimation : MonoBehaviour
         }
         else 
         {
-            ShowMessageManager.Instance.ShowMessage("无动画!");
+            ShowMessageManager.Instance.ShowMessage("No Animation");
         }
     }
     public void PlayAniLast()
@@ -30,7 +30,7 @@ public class PlayAnimation : MonoBehaviour
         }
         else
         {
-            ShowMessageManager.Instance.ShowMessage("无动画!");
+            ShowMessageManager.Instance.ShowMessage("No Animation");
         }
     }
 }

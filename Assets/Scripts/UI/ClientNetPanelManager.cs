@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Common;
 using MixedReality.Toolkit.UX;
 using Network.Client;
 using TMPro;
@@ -31,7 +32,7 @@ namespace UI
             ipInputField.text = ClientNetworkManager.Instance.ip;
             netConnectPanel.SetActive(true);
             RefreshClientList(new List<ClientInfo>());
-            // ShowMessageManager.Instance.ShowMessage("服务器连接已断开!");
+            ShowMessageManager.Instance.ShowMessage("The server is disconnected");
             clientToggle.ForceSetToggled(false);
         }
 
@@ -46,7 +47,7 @@ namespace UI
                 clientToggle.ForceSetToggled(true);
             }
 
-            // ShowMessageManager.Instance.ShowMessage("服务器连接:" + result);
+            ShowMessageManager.Instance.ShowMessage("Server connection:" + result);
         }
 
         public void Connect()
@@ -89,7 +90,7 @@ namespace UI
 
             print("RefreshClientList:" + list.Count);
             LayoutRebuilder.ForceRebuildLayoutImmediate(clientList.GetComponent<RectTransform>());
-            // ShowMessageManager.Instance.ShowMessage("客户端列表已更新!");
+            ShowMessageManager.Instance.ShowMessage("The client list has been updated");
         }
     }
 }

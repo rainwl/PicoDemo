@@ -24,25 +24,29 @@ namespace Common
 
         private void Update()
         {
-            //if (Input.GetKeyUp(KeyCode.M))
-            //{
-            //    ShowMessage("0123456789abc".Substring(UnityEngine.Random.Range(0,10)));
-            //}
-            //if (Input.GetKeyUp(KeyCode.B))
-            //{
-            //    ShowSelectBox("是否删除?",null,null);
-            //}
+            if (Input.GetKeyUp(KeyCode.M))
+            {
+                ShowMessage("0123456789abc".Substring(UnityEngine.Random.Range(0,10)));
+            }
+            if (Input.GetKeyUp(KeyCode.B))
+            {
+                ShowSelectBox("is delete?",null,null);
+            }
         }
 
         public void ShowMessage(string mes, float time = 2)
         {
             var go = Instantiate(messagePrefab, messageLayout);
             go.SetActive(true);
-            var text = go.transform.Find("Text").GetComponent<TextMeshProUGUI>();
+            print("go.SetActive(true);");
+            // var text = go.transform.Find("Text").GetComponent<TMP_Text>();
+            var text = go.transform.GetComponentInChildren<TMP_Text>();
             text.text = mes;
             var rect = go.GetComponent<RectTransform>();
+            
             rect.sizeDelta = new Vector2(text.preferredWidth + 10, rect.sizeDelta.y);
             Destroy(go, time);
+            print("Destroy(go, time);");
         }
 
         public void ShowSelectBox(string warn, Action yes, Action no = null)

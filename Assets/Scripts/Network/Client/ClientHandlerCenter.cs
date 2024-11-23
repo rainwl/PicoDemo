@@ -86,7 +86,7 @@ namespace Network.Client
         {
             var result = (Result)BitConverter.ToInt32(model.Message, 0);
             print("OnUploadAnchor result:" + result);
-            // ShowMessageManager.Instance.ShowMessage("上传锚点:" + result);
+            ShowMessageManager.Instance.ShowMessage("Upload anchor: " + result);
         }
 
         private void OnDownloadAnchor(DataModel model)
@@ -95,11 +95,11 @@ namespace Network.Client
             {
                 var result = (Result)BitConverter.ToInt32(model.Message, 0);
                 print("OnDownloadAnchor result:" + result);
-                // ShowMessageManager.Instance.ShowMessage("锚点下载:" + result);
+                ShowMessageManager.Instance.ShowMessage("Anchor download: " + result);
             }
             else if (model.Message.Length > 4)
             {
-                // ShowMessageManager.Instance.ShowMessage("下载成功!");
+                ShowMessageManager.Instance.ShowMessage("Download successfully!");
                 print("OnDownloadAnchor length:" + model.Message.Length);
                 OnOnDownloadAnchorData?.Invoke(model.Message);
             }

@@ -38,7 +38,7 @@ namespace MR
 
         public void OnRequestCalibration(BroadcastInfo info)
         {
-            //ShowMessageManager.Instance.ShowSelectBox("开始扫描校准?",()=> { StartCallibration(info); });  
+            ShowMessageManager.Instance.ShowSelectBox("Start Calibration?",()=> { StartCalibration(info); });  
             PlaySoundManager.Instance.PlayEffect("StartScan");
             StartCalibration(info);
         }
@@ -51,7 +51,7 @@ namespace MR
 
             if (height < 0.1f)
             {
-                ShowMessageManager.Instance.ShowMessage("屏幕高度不正确!");
+                ShowMessageManager.Instance.ShowMessage("The screen height is incorrect");
                 return;
             }
 
@@ -78,7 +78,7 @@ namespace MR
             if (_isScanning)
             {
                 Debug.Log("扫描超时!");
-                ShowMessageManager.Instance.ShowMessage("扫描超时!");
+                ShowMessageManager.Instance.ShowMessage("Scan timeout");
                 StopScan();
             }
         }
@@ -197,7 +197,7 @@ namespace MR
 
             Destroy(screen, 1);
             Debug.Log("校准完成!");
-            ShowMessageManager.Instance.ShowMessage("校准完成!");
+            ShowMessageManager.Instance.ShowMessage("Calibration complete");
         }
 
 
