@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections;
 using Common;
+using Dock;
 using MixedReality.Toolkit.SpatialManipulation;
 using Network.Client;
 using UI;
 using UnityEngine;
-using UnityEngine.Serialization;
-
-// using Microsoft.MixedReality.Toolkit.UI;
-// using Microsoft.MixedReality.Toolkit.Utilities;
-// using Dock;
 
 namespace MR
 {
@@ -205,7 +201,6 @@ namespace MR
             ShowMessageManager.Instance.ShowMessage("Calibration complete");
         }
 
-
         internal void DownLoadAnchor()
         {
             SendDataManager.SendDownloadAnchor();
@@ -224,8 +219,6 @@ namespace MR
             HoloLensAnchorManager.Instance.ExprotAnchorData(anchorRoot.gameObject, SendDataManager.SendUploadAnchor);
         }
 
-
-        //发送校准请求给客户端
         internal static void SendCalibrationRequest(int id)
         {
         }
@@ -262,17 +255,19 @@ namespace MR
                 go.transform.localEulerAngles = new Vector3(rotx, roty, rotz);
                 go.AddComponent<UpdateTransform>().updateID = updateID;
                 go.AddComponent<PlayAnimation>();
-                // go.AddComponent<Dockable>();//考虑下这里是不是可以用其他代码实现
+                go.AddComponent<Dockable>();
 
                 var om = go.AddComponent<ObjectManipulator>();
 
-                // RotationAxisConstraint rc = go.AddComponent<RotationAxisConstraint>();
-                // rc.ConstraintOnRotation = RotateAxisConstraint;
-                //缩放约束
-                MinMaxScaleConstraint scale = go.AddComponent<MinMaxScaleConstraint>();
+                var cm = go.AddComponent<ConstraintManager>();
+
+
+                var scale = go.AddComponent<MinMaxScaleConstraint>();
                 scale.MaximumScale = new Vector3(scaleMaximum, scaleMaximum, scaleMaximum);
                 scale.MinimumScale = new Vector3(scaleMinimum, scaleMinimum, scaleMinimum);
 
+                scale.HandType = ManipulationHandFlags.TwoHanded;
+                scale.ProximityType = ManipulationProximityFlags.Near | ManipulationProximityFlags.Far;
                 om.MoveLerpTime = UpdateTransformManager.Instance.UpdateTime;
                 om.RotateLerpTime = UpdateTransformManager.Instance.UpdateTime;
                 om.ScaleLerpTime = UpdateTransformManager.Instance.UpdateTime;
