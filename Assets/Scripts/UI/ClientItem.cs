@@ -97,7 +97,7 @@ namespace UI
                 return;
             }
 
-            ShowMessageManager.Instance.ShowSelectBox("Calibration client?", () => { ARManager.Instance.SendCallibrationRequest(id); });
+            ShowMessageManager.Instance.ShowSelectBox("Calibration client?", () => { ARManager.SendCalibrationRequest(id); });
         }
     }
 }

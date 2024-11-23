@@ -38,19 +38,19 @@ namespace Common
                     ARManager.Instance.OnRequestCalibration(info);
                     break;
                 case BroadcastType.ConfirmCallibration:
-                    ARManager.Instance.OnConfirmCallibration(info.UserId);
+                    ARManager.OnConfirmCalibration(info.UserId);
                     break;
                 case BroadcastType.CallibrationData:
-                    ARManager.Instance.OnCallibrationData(info);
+                    ARManager.Instance.OnCalibrationData(info);
                     break;
                 case BroadcastType.StartHoloview:
-                    ARManager.Instance.OnStartHoloview(info);
+                    ARManager.OnStartHoloView(info);
                     break;
                 case BroadcastType.StopHoloview:
-                    ARManager.Instance.OnStopHoloview(info);
+                    ARManager.OnStopHoloView(info);
                     break;
                 case BroadcastType.HoloviewData:
-                    ARManager.Instance.OnHoloviewData(info);
+                    ARManager.OnHoloViewData(info);
                     break;
                 case BroadcastType.DockByID:
                     DockByID(info.Data);

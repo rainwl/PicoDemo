@@ -176,7 +176,7 @@ public class HoloCaptureManager : MonoBehaviour
     {
         onVideoData = false;
         byte[] imageBytes = ImageConversion.EncodeToJPG(VideoTexture);//帧率降低到30以下
-        ARManager.Instance.SendHoloviewData(imageBytes);
+        ARManager.Instance.SendHoloViewData(imageBytes);
     }
 
     public void OnVideoDataReceive(byte[] data)
