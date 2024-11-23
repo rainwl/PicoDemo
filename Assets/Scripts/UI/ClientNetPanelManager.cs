@@ -16,6 +16,7 @@ namespace UI
         public GameObject netConnectPanel;
         public TMP_InputField ipInputField;
         public PressableButton clientToggle;
+        public GameObject keyboard;
         
         private IEnumerator Start()
         {
@@ -31,6 +32,7 @@ namespace UI
         {
             ipInputField.text = ClientNetworkManager.Instance.ip;
             netConnectPanel.SetActive(true);
+            keyboard.SetActive(true);
             RefreshClientList(new List<ClientInfo>());
             ShowMessageManager.Instance.ShowMessage("The server is disconnected");
             clientToggle.ForceSetToggled(false);
@@ -40,6 +42,7 @@ namespace UI
         {
             ipInputField.text = ClientNetworkManager.Instance.ip;
             netConnectPanel.SetActive(!result);
+            keyboard.SetActive(!result);
             //连接成功后更新用户信息
             if (result)
             {
