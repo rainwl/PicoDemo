@@ -18,7 +18,7 @@ public class JoinChannelVideo : MonoBehaviour
 
     public PressableButton joinButton;
     public PressableButton leaveButton;
-
+    private static Vector2 _initialSize;
     private void Start()
     {
         SetupVideoSDKEngine();
@@ -63,7 +63,14 @@ public class JoinChannelVideo : MonoBehaviour
         leaveButton.OnClicked.AddListener(Leave);
         var go = GameObject.Find("RemoteView");
         _remoteView = go.AddComponent<VideoSurface>();
-        go.transform.Rotate(0.0f, 0.0f, -180.0f);
+        go.transform.Rotate(0.0f, 0.0f, 180.0f);
+        RectTransform rt = go.GetComponent<RectTransform>();
+        if (rt != null)
+        {
+            // 保存初始尺寸
+            _initialSize = rt.sizeDelta;
+            Debug.Log($"Initial Size: Width={_initialSize.x}, Height={_initialSize.y}");
+        }
     }
 
     private void SetupVideoSDKEngine()
@@ -112,7 +119,37 @@ public class JoinChannelVideo : MonoBehaviour
         {
             _videoSample = videoSample;
         }
+        
+        public override void OnVideoSizeChanged(
+            RtcConnection connection,
+            VIDEO_SOURCE_TYPE sourceType,
+            uint uid,
+            int width,
+            int height,
+            int rotation)
+        {
+            Debug.Log($"Remote video size changed: UID={uid}, Width={width}, Height={height}, Rotation={rotation}");
 
+            if (width > 0 && height > 0)
+            {
+                float aspectRatio = (float)width / height;
+
+                // 固定初始宽度，调整高度
+                float newHeight = _initialSize.x / aspectRatio;
+
+                // 获取 RemoteView 的 RectTransform
+                var remoteView = _videoSample._remoteView.GetComponent<RectTransform>();
+                if (remoteView != null)
+                {
+                    remoteView.sizeDelta = new Vector2(_initialSize.x, newHeight);
+                    Debug.Log($"Adjusted RemoteView to Width={_initialSize.x}, Height={newHeight}");
+                }
+            }
+        }
+
+
+
+        
         // 发生错误回调
         public override void OnError(int err, string msg)
         {
@@ -130,6 +167,11 @@ public class JoinChannelVideo : MonoBehaviour
             _videoSample._remoteView.SetForUser(uid, connection.channelId, VIDEO_SOURCE_TYPE.VIDEO_SOURCE_REMOTE);
             // 开始视频渲染
             _videoSample._remoteView.SetEnable(true);
+            
+            // 在设置远端视频显示后添加以下代码
+            _videoSample._remoteView.transform.localScale = new Vector3(-1, 1, 1); // 左右镜像
+            _videoSample._remoteView.transform.localPosition = Vector3.zero; // 确保位置未改变
+
             Debug.Log("Remote user joined");
         }
 
